@@ -18,6 +18,12 @@ export class ExportExcelPage {
     jsonExcel.push({ report_id: "Kỳ báo cáo1", id: "Mã quản lý1", table_name: "Tên bảng1" })
     jsonExcel.push({ report_id: "Kỳ báo cáo2", id: "Mã quản lý2", table_name: "Tên bảng2" })
 
+    //Nhân bản jsonExcel lên nhiều lần
+    for (let i = 1; i < 19; i++) {
+      jsonExcel = jsonExcel.concat(jsonExcel)
+    }
+    console.log(jsonExcel.length);
+
     const ws: xlsx.WorkSheet = xlsx.utils.json_to_sheet(jsonExcel);
 
     const wb: xlsx.WorkBook = xlsx.utils.book_new();
