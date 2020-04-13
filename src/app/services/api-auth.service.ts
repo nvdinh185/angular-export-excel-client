@@ -8,19 +8,16 @@ export class ApiAuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-   /**
-     * get url => req.paramS
-     * @param url 
-     * @param token 
-     * @param options 
-     */
-    getDynamicUrl(url: string) {
-      return this.httpClient.get(url)
-          .toPromise()
-          .then(data => {
-              let rtn: any;
-              rtn = data;
-              return rtn;
-          });
+  /**
+    * get url
+    * @param url 
+    */
+  getDynamicUrl(url: string) {
+    return this.httpClient.get(url)
+      .toPromise()
+      .then(data => {
+        let rtn: any = data;
+        return rtn;
+      });
   }
 }
