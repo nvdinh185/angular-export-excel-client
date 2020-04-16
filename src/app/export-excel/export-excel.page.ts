@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 import * as xlsx from 'xlsx';
 
@@ -9,7 +10,46 @@ import * as xlsx from 'xlsx';
 })
 export class ExportExcelPage {
 
-  constructor() { }
+  constructor(public alertController: AlertController) { }
+
+  async presentAlertRadio() {
+    const alert = await this.alertController.create({
+      header: 'Radio',
+      inputs: [
+        {
+          name: 'radio1',
+          type: 'radio',
+          label: 'Radio 1',
+          value: 'value1',
+          checked: true
+        },
+        {
+          name: 'radio2',
+          type: 'radio',
+          label: 'Radio 2',
+          value: 'value2'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: data => {
+            console.log('data', data);
+            this.exportToExcel()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   exportToExcel() {
 
@@ -19,7 +59,7 @@ export class ExportExcelPage {
     jsonExcel.push({ report_id: "Kỳ báo cáo2", id: "Mã quản lý2", table_name: "Tên bảng2" })
 
     //Nhân bản jsonExcel lên nhiều lần
-    for (let i = 1; i < 19; i++) {
+    for (let i = 1; i < 15; i++) {
       jsonExcel = jsonExcel.concat(jsonExcel)
     }
     console.log(jsonExcel.length);
