@@ -5,5 +5,10 @@
 </ion-header>
 
 <ion-content>
-
+  <button (click)="exportToExcel()">Export To Excel</button><br />
+  <button>
+    <input class="file-over" type="file" multiple="single" (change)="uploadFilesEvent($event)"
+      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+    <span style="text-transform: none;">Upload Excel</span>
+  </button>
 </ion-content>
