@@ -83,4 +83,36 @@ export class ExportExcelPage {
     xlsx.writeFile(wb, `epltablereduce-${Date.now()}.xlsx`);
   }
 
+  
+  exportToExcelHeader() {
+
+    const keys = [
+      'report_id'
+      , 'id'
+      , 'table_name'
+    ]
+
+    const cols_name = [
+      'Kỳ báo cáo'
+      , 'Mã quản lý'
+      , 'Tên bảng'
+    ]
+
+    let jsonExcel = []
+
+    let secondRow = keys.reduce((a, b, idx) => (a[b] = cols_name[idx], a), {});
+    jsonExcel.push(secondRow)
+
+    let header = keys;
+    console.log(jsonExcel);
+    // let header = keys; // Nếu có header thì header có ý nghĩa gì???
+    const ws: xlsx.WorkSheet = xlsx.utils.json_to_sheet(jsonExcel);
+
+    const wb: xlsx.WorkBook = xlsx.utils.book_new();
+
+    xlsx.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    xlsx.writeFile(wb, `epltablereduce-${Date.now()}.xlsx`);
+  }
+
 }
