@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 import * as xlsx from 'xlsx';
+import { ApiAuthService } from '../services/api-auth.service';
 
 @Component({
   selector: 'app-export-excel',
@@ -10,7 +11,10 @@ import * as xlsx from 'xlsx';
 })
 export class ExportExcelPage {
 
-  constructor(public alertController: AlertController) { }
+  constructor(
+    public alertController: AlertController
+    , private apiAuth: ApiAuthService
+  ) { }
 
   async presentAlertRadio() {
     const alert = await this.alertController.create({
@@ -42,7 +46,12 @@ export class ExportExcelPage {
           text: 'Ok',
           handler: data => {
             console.log('data', data);
-            this.exportToExcel()
+            this.apiAuth.getDynamicUrl('assets/data/news-info.json')
+            .then(res => {
+              console.log(res)
+              this.exportToExcel()
+            })
+            .catch(err => console.log(err))
           }
         }
       ]
@@ -123,7 +132,7 @@ export class ExportExcelPage {
     xlsx.writeFile(wb, `epltablereduce-${Date.now()}.xlsx`);
   }
 
-  
+
   exportToExcelHeader() {
 
     const keys = [
