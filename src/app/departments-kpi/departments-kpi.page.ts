@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiAuthService } from '../services/api-auth.service';
 
 import * as xlsx from 'xlsx';
 
@@ -10,9 +9,7 @@ import * as xlsx from 'xlsx';
 })
 export class DepartmentsKpiPage implements OnInit {
 
-  constructor(
-    private apiAuth: ApiAuthService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -40,7 +37,6 @@ export class DepartmentsKpiPage implements OnInit {
     jsonExcel.unshift(secondRow)
 
     console.log(jsonExcel);
-    console.log(jsonExcel.length);
 
     const ws: xlsx.WorkSheet = xlsx.utils.json_to_sheet(jsonExcel);
 

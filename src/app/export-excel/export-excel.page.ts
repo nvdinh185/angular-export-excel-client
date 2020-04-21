@@ -132,7 +132,6 @@ export class ExportExcelPage {
     xlsx.writeFile(wb, `epltablereduce-${Date.now()}.xlsx`);
   }
 
-
   exportToExcelHeader() {
 
     const keys = [
