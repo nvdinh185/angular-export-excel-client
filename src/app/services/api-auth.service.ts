@@ -12,8 +12,8 @@ export class ApiAuthService {
     * get url
     * @param url 
     */
-  getDynamicUrl(url: string) {
-    return this.httpClient.get(url)
+  getDynamicUrl(url: string, options?: any) {
+    return this.httpClient.get(url, options)
       .toPromise()
       .then(data => {
         let rtn: any = data;
